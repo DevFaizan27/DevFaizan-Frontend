@@ -8,8 +8,8 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem('token'));
 
-  // const local_backend_url='https://dev-faizan-backend.vercel.app'
-  const local_backend_url='http://localhost:4000'
+  const local_backend_url='https://dev-faizan-backend.vercel.app'
+  // const local_backend_url='http://localhost:4000'
 
 
   useEffect(() => {
