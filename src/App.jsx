@@ -151,7 +151,7 @@ const App = () => {
   useEffect(() => {
     if (!token) return;
 
-    const socket = io('http://localhost:4000', {
+    const socket = io('https://dev-faizan-backend.vercel.app/', {
       query: { token },
     });
 
@@ -179,7 +179,7 @@ const App = () => {
     const { latitude, longitude } = position.coords;
 
     axios.post(
-      'http://localhost:4000/location',
+      'https://dev-faizan-backend.vercel.app/location',
       { latitude, longitude },
       {
         headers: {

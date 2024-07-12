@@ -20,7 +20,7 @@ const AuthProvider = ({ children }) => {
 
   const login = async (username, password) => {
     try {
-      const response = await axios.post('http://localhost:4000/api/auth/login', { username, password });
+      const response = await axios.post('https://dev-faizan-backend.vercel.app/api/auth/login', { username, password });
       const token = response.data.token;
       localStorage.setItem('token', token);
       setToken(token);
@@ -33,7 +33,7 @@ const AuthProvider = ({ children }) => {
 
   const signup = async (username, password) => {
     try {
-      const response = await axios.post('http://localhost:4000/api/auth/signup', { username, password });
+      const response = await axios.post('https://dev-faizan-backend.vercel.app/api/auth/signup', { username, password });
       const token = response.data.token;
       localStorage.setItem('token', token);
       setToken(token);
