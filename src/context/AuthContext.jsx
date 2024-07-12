@@ -8,15 +8,15 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem('token'));
 
-  useEffect(() => {
-    if (token) {
-      const decoded = jwtDecode(token);
-      setUser(decoded);
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    } else {
-      delete axios.defaults.headers.common['Authorization'];
-    }
-  }, [token]);
+  // useEffect(() => {
+  //   if (token) {
+  //     const decoded = jwtDecode(token);
+  //     setUser(decoded);
+  //     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  //   } else {
+  //     delete axios.defaults.headers.common['Authorization'];
+  //   }
+  // }, [token]);
 
   const login = async (username, password) => {
     try {
