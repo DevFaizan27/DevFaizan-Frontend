@@ -8,19 +8,21 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem('token'));
 
-  // useEffect(() => {
-  //   if (token) {
-  //     const decoded = jwtDecode(token);
-  //     setUser(decoded);
-  //     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-  //   } else {
-  //     delete axios.defaults.headers.common['Authorization'];
-  //   }
-  // }, [token]);
+  const local_backend_url='https://dev-faizan-backend.vercel.app'
+
+  useEffect(() => {
+    if (token) {
+      const decoded = jwtDecode(token);
+      setUser(decoded);
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    } else {
+      delete axios.defaults.headers.common['Authorization'];
+    }
+  }, [token]);
 
   const login = async (username, password) => {
     try {
-      const response = await axios.post('https://dev-faizan-backend.vercel.app/api/auth/login', { username, password });
+      const response = await axios.post(`${local_backend_url}/api/auth/login`, { username, password });
       const token = response.data.token;
       localStorage.setItem('token', token);
       setToken(token);
@@ -33,7 +35,7 @@ const AuthProvider = ({ children }) => {
 
   const signup = async (username, password) => {
     try {
-      const response = await axios.post('https://dev-faizan-backend.vercel.app/api/auth/signup', { username, password });
+      const response = await axios.post(`${local_backend_url}/api/auth/signup`, { username, password });
       const token = response.data.token;
       localStorage.setItem('token', token);
       setToken(token);

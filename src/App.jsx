@@ -16,6 +16,8 @@ const center = {
   lng: 77.209,
 };
 
+const local_backend_url='https://dev-faizan-backend.vercel.app'
+
 const App = () => {
   const { user, token } = useContext(AuthContext);
   const { isLoaded, loadError } = useLoadScript({
@@ -28,7 +30,7 @@ const App = () => {
   useEffect(() => {
     if (!token) return;
 
-    const socket = io('https://dev-faizan-backend.vercel.app/', {
+    const socket = io(`${local_backend_url}`, {
       query: { token },
     });
 
@@ -56,12 +58,12 @@ const App = () => {
     const { latitude, longitude } = position.coords;
 
     axios.post(
-      'https://dev-faizan-backend.vercel.app/location',
+      `${local_backend_url}/location`,
       { latitude, longitude },
       {
         headers: {
           'Content-Type': 'application/json',
-          'auth-token':token,
+          'auth-token': token,
         },
       }
     )
