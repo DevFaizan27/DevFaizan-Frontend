@@ -16,9 +16,9 @@ const AuthProvider = ({ children }) => {
     if (token) {
       const decoded = jwtDecode(token);
       setUser(decoded);
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      axios.defaults.headers.common['auth-token'] = token;
     } else {
-      delete axios.defaults.headers.common['Authorization'];
+      delete axios.defaults.headers.common['auth-token'];
     }
   }, [token]);
 
