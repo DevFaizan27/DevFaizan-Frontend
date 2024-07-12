@@ -151,9 +151,9 @@ const App = () => {
 
   const [markers, setMarkers] = useState([]);
 
-  const backend='https://dev-faizan-backend.vercel.app'
+  // const backend='https://dev-faizan-backend.vercel.app'
 
-  // const backend='http://localhost:4000'
+  const backend='http://localhost:4000'
 
   useEffect(() => {
     if (!token) return;
