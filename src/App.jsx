@@ -158,7 +158,7 @@ const App = () => {
   useEffect(() => {
     if (!token) return;
 
-    const socket = io(`${backend}`, {
+    const socket = io(`${local_backend_url}`, {
       query: { token },
     });
 
@@ -184,7 +184,7 @@ const App = () => {
     const { latitude, longitude } = position.coords;
 
     axios.post(
-      `${backend}/location`,
+      `${local_backend_url}/location`,
       { latitude, longitude },
       {
         headers: {
