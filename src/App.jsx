@@ -21,7 +21,7 @@ const local_backend_url='https://dev-faizan-backend.vercel.app'
 const App = () => {
   const { user, token } = useContext(AuthContext);
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyAjz90kCAlCesuB-Vwv7BJ4quJtsWNmGDE', // Replace with your Google Maps API key
+    googleMapsApiKey: 'AIzaSyDrROirhFaapbWyT1rusyEvBF0lpVxpUyE', // Replace with your Google Maps API key
     libraries,
   });
 
