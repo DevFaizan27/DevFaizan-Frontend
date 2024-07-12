@@ -16,13 +16,10 @@ const center = {
   lng: 77.209,
 };
 
-const local_backend_url='https://dev-faizan-backend.vercel.app'
-
-
 const App = () => {
   const { user, token } = useContext(AuthContext);
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyDrROirhFaapbWyT1rusyEvBF0lpVxpUyE', // Replace with your Google Maps API key
+    googleMapsApiKey: 'AIzaSyDrROirhFaapbWyT1rusyEvBF0lpVxpUyE',
     libraries,
   });
 
@@ -31,11 +28,10 @@ const App = () => {
   useEffect(() => {
     if (!token) return;
 
-    const socket = io(`${local_backend_url}`, {
+    const socket = io('https://dev-faizan-backend.vercel.app', {
       query: { token },
     });
 
-    // Handle location updates received from server
     socket.on('locationBroadcast', (location) => {
       setMarkers((prevMarkers) => {
         const existingMarkerIndex = prevMarkers.findIndex(
@@ -54,12 +50,11 @@ const App = () => {
     return () => socket.disconnect();
   }, [token]);
 
-  // Function to handle location updates and send to server
   const handleLocationUpdate = (position) => {
     const { latitude, longitude } = position.coords;
 
     axios.post(
-      `${local_backend_url}/location`,
+      'https://dev-faizan-backend.vercel.app/location',
       { latitude, longitude },
       {
         headers: {
@@ -80,11 +75,15 @@ const App = () => {
 
   useEffect(() => {
     if (navigator.geolocation && user) {
-      // Watch for continuous location updates
       const watchId = navigator.geolocation.watchPosition(
         handleLocationUpdate,
         (error) => {
           console.error(error);
+        },
+        {
+          enableHighAccuracy: true,
+          maximumAge: 0,
+          timeout: 5000,
         }
       );
 
@@ -99,14 +98,14 @@ const App = () => {
     <div>
       {!user ? (
         <div>
-          <Signup />
-          <Login />
+         <Signup/>
+         <Login/>
         </div>
       ) : (
         <GoogleMap mapContainerStyle={mapContainerStyle} zoom={10} center={center}>
           {markers.map((marker) => (
             <Marker
-              key={marker._id} // Assuming marker has a unique identifier like _id
+              key={marker.employeeId}
               position={{ lat: marker.latitude, lng: marker.longitude }}
             />
           ))}
